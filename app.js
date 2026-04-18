@@ -6,6 +6,10 @@ const seedDB = require('./seed');
 const productRoutes = require('./routes/productRoutes')
 const reviewRoutes = require('./routes/review')
 const methodOverride = require('method-override')
+const ejsMate = require('ejs-mate');
+
+// ejs mate ko set karna zaroori hai taki hum apne html files me ejs code ka use kar sakein aur dynamic data render kar sakein
+app.engine('ejs' , ejsMate);
 
 mongoose.connect('mongodb://127.0.0.1:27017/titans')
 .then(function(){
@@ -14,6 +18,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/titans')
 .catch(function(err){
     console.log(err , "ERROR");
 })
+// ejs mate and ejs template difference : ejs mate is a template engine that is used to render dynamic data in our html files. ejs template is a file that contains html code and ejs code. ejs code is written inside <% %> tags. ejs code can be used to render dynamic data in our html files. for example, we can use ejs code to render the name of the product in our html file. 
+// default engine is express ka jo hume html files ko serve karne ke liye use karna padta hai but agar hume dynamic data render karna hai to hume ejs template engine ka use karna padta hai. isliye hum ejs template engine ko set karte hain apne app me taki hum dynamic data render kar sakein apne html files me.
+// dynamic data render kya hai : dynamic data render ka matlab hai ki hum apne html files me aise data ko render karna chahte hain jo ki runtime pe change hota hai. for example, agar hum apne html file me product ka name render karna chahte hain to hum ejs code ka use karte hain taki hum product ka name runtime pe render kar sakein. isliye hum ejs template engine ko set karte hain apne app me taki hum dynamic data render kar sakein apne html files me.
 
 // setting up ejs reason : to render dynamic data in our html files we need a template engine and ejs is one of the most popular template engines for node js
 app.set('view engine'  , 'ejs');
