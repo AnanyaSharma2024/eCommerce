@@ -6,34 +6,34 @@ const router = express.Router(); //mini server
 // all the products
 router.get('/products' , async(req,res)=>{
     let allProducts =  await Product.find({});
-    res.render('product/index' , {allProducts})
+    res.render('product/index' , {allProducts})// this will render the index.ejs file and pass the allProducts variable to it
 })
 
 // form for adding new product
 router.get('/product/new', (req,res)=>{
-    res.render('product/new')
+    res.render('products/new')// this will render the form for adding new product
 })
 
 // actually adding the product
 router.post('/products' , async(req,res)=>{
     let {name,img,price,desc} = req.body;
     await Product.create({name,img,price,desc});
-    res.redirect('/products')
+    res.redirect('/products')// after adding the product we want to redirect the user to the products page
 })
 
 // particular product
 router.get('/products/:idd' , async(req,res)=>{
-    let {idd} = req.params;
-    let foundProduct = await Product.findById(idd).populate('reviews');
+    let {idd} = req.params;// req.param`s is used to get the value of the idd parameter from the url
+    let foundProduct  = await Product.findById(idd).populate('reviews');
     // console.log(foundProduct , "review too");
-    res.render('product/show' , {foundProduct})
+    res.render('product/show' , {foundProduct})// this will render the show.ejs file and pass the foundProduct variable to it
 })
 
 // form for editing the products
 router.get('/products/:idd/edit', async(req,res)=>{
     let {idd} = req.params;
     let foundProduct = await Product.findById(idd);
-    res.render('product/edit', {foundProduct})
+    res.render('product/edit', {foundProduct})// only the product that we want to edit will be passed to the edit.ejs file and then we can use that product to pre-fill the form fields in the edit.ejs file
 })
 
 // actually editing the product
@@ -41,7 +41,7 @@ router.patch('/products/:idd', async(req,res)=>{
     let {idd} = req.params;
     let {name,img,price,desc} = req.body;
     await Product.findByIdAndUpdate(idd,{name,img,price,desc});
-    res.redirect('/products')
+    res.redirect(`/products/${idd}`)// after editing the product we want to redirect the user to the show page of that product
 })
 
 // delete

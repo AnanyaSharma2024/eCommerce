@@ -1,31 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Form to add new product</h1>
-    <form action="/products" method="POST">
-        <div>
-            <label for="naam">Name:</label>
-            <input type="text" name="name" id="naam">
+<% layout('layouts/boilerplate') %>
+<% include('../partials/header') %>
+
+
+    <div class = "row">
+        <div class="col-6 mx-auto">
+
+            <form action="/products" methods="POST">
+                <div class="mb-3">
+                    <label for="naam">Name:</label>
+                    <input type="text" class="form-control" name="name" id="naam" placeholder="Name of the product">
+                </div>
+
+                <div class="mb-3">
+                    <label for="img">Image:</label>
+                    <input type="text" class="form-control" name="img" id="img" placeholder="Image URL">
+                </div>
+
+                <div class="mb-3">
+                    <label for="paisa">Price:</label>
+                    <input type="number" class="form-control" name="price" id="paisa" placeholder="Price of the product" step="0.01" min="0">
+                </div>
+
+                <div class="mb-3">
+                    <label for="desc">Description:</label>
+                    <textarea name="desc" id="desc" rows="5" placeholder="Description of the product"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-primary">
+                    Add Product
+                </button>
+            </form>
         </div>
-        <div>
-            <label for="img">Image:</label> 
-            <input type="text" name="img" id="img">
-        </div>
-        <div>
-            <label for="paisa">Price:</label>
-            <input type="text" name="price" id="paisa">
-        </div>
-        <div>
-            <label for="dessc">Description:</label>
-            <textarea rows="5" cols="15" name="desc" id="dessc"></textarea>
-        </div>
-    
-        <button>Add Product</button>
-    </form>
+    </div>
 </body>
 </html>

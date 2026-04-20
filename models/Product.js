@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    reviews:[
+    reviews:[// array h kyuki bahot saare ho sakte h ek product ke
         {
             // what is this ? : this is a reference to the review model and it will store the id of the review in the product document and we can populate the review data using the id
             type: mongoose.Schema.Types.ObjectId,

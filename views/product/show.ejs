@@ -1,61 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/star.css">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Particular product</h1>
-
-        <h1> <%=foundProduct.name%> </h1>
-        <img src="<%=foundProduct.img%>" alt="">
-        <h1> <%=foundProduct.price%> </h1>
-        <h1> <%=foundProduct.desc%> </h1>
-        <a href="/products">Back</a>
-
-    <hr>
-    <form action="/products/<%=foundProduct._id%>/review" method="POST">
-        <h1>Adding Reviews</h1>
-        <div>
-            <label for="rate">Rating:</label>
-            <!-- <input type="range" min="0" max="5" name="rating" id="rate"> -->
-            <fieldset class="starability-basic">
-                <legend>First rating:</legend>
-                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
-                <input type="radio" id="first-rate1" name="rating" value="1" />
-                <label for="first-rate1" title="Terrible">1 star</label>
-                <input type="radio" id="first-rate2" name="rating" value="2" />
-                <label for="first-rate2" title="Not good">2 stars</label>
-                <input type="radio" id="first-rate3" name="rating" value="3" />
-                <label for="first-rate3" title="Average">3 stars</label>
-                <input type="radio" id="first-rate4" name="rating" value="4" />
-                <label for="first-rate4" title="Very good">4 stars</label>
-                <input type="radio" id="first-rate5" name="rating" value="5" />
-                <label for="first-rate5" title="Amazing">5 stars</label>
-            </fieldset>
-        </div>
-        <div>
-            <label for="comm">Comment:</label>
-            <textarea name="comment" id="comm"></textarea>
-        </div>
-        <button type="submit">Add review</button>
-    </form>
-
-    <hr>
-
-    <h1>Reviews</h1>
-    <div>
-        <% for(let review of foundProduct.reviews){  %>
-            <!-- <h1> <%=review.rating%></h1> -->
-            <p class="starability-result" data-rating="<%=review.rating%>">
-                Rated: <%=review.rating%> stars
-              </p>
-            <h1> <%=review.comment%></h1>
-            <hr>
-        <% } %>
+<!-- include boiler plate -->
+<% layout('layouts/boilerplate') %>
+<!-- include partials -->
+<% include('../partials/header') %>
+<div class="container mt-4">
+    <div class="row">
+            <div class="col-lg-6 col-md-4 col-sm-6 mb-4">
+                <div class="card shadow mx-auto" style="width: 18rem;">
+                    <img 
+                        src="<%= foundProduct.img %>" 
+                        class="card-img-top" 
+                        alt="<%= foundProduct.name %>"
+                        style="height:180px; object-fit:cover;"
+                    >
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <%= foundProduct.name %>
+                        </h6>
+                        <p class="card-title">
+                            ₹ <%= foundProduct.price %>
+                        </p>
+                        <p class="card-text">
+                            <%= foundProduct.desc %>
+                        </p>
+                        <a href="/products/<%= foundProduct._id %>" class="btn btn-sm btn-primary">
+                            Add to Cart
+                        </a>
+                        <a href="/cart/add/<%= foundProduct._id %>" class="btn btn-sm btn-info">
+                            Buy Product
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-4">Leave a Review</h1>
+                <form action="/products/<%= foundProduct._id %>/reviews" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label" for="stars">Rating:</label>
+                        <input class="form-control" type="range" min="0" max="5" step="0.5" name="rating" id="stars">
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" rows="3" id="comment" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success">Submit Review</button>
+                </form>
+            </div>
     </div>
-
-</body>
-</html>
+</div>
