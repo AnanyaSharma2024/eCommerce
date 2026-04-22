@@ -28,6 +28,16 @@ const productSchema = new mongoose.Schema({
     ]
 });
 
+//middleware jo mongo db ke operatiions krwane m use hota h 
+//pre and post middleware hote h pre middleware operation se pehle chalta h aur post middleware operation ke baad chalta h
+productSchema.post('findOneAndDelete' , async function(product){
+    if(product.reviews.length > 0){
+        // isse ensure hoga ki jab bhi koi product delete hoga to uske saare reviews bhi delete ho jayenge kyuki reviews ka reference product ke andar stored hota h to jab product delete hoga to uske saare reviews bhi delete ho jayenge
+        await Review.deleteMany({_id:{$in:product.reviews}})
+    }
+});
+
+
 const Product = mongoose.model('Product', productSchema)
 
 module.exports = Product;

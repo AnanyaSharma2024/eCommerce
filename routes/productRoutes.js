@@ -24,6 +24,7 @@ router.post('/products' , async(req,res)=>{
 // particular product
 router.get('/products/:idd' , async(req,res)=>{
     let {idd} = req.params;// req.param`s is used to get the value of the idd parameter from the url
+    //  populate is used to get the reviews of the product along with the product details when we are showing the product details page because we want to show the reviews of the product on the product details page so we need to populate the reviews field of the product model to get the reviews of the product along with the product details
     let foundProduct  = await Product.findById(idd).populate('reviews');
     // console.log(foundProduct , "review too");
     res.render('product/show' , {foundProduct})// this will render the show.ejs file and pass the foundProduct variable to it
@@ -45,10 +46,15 @@ router.patch('/products/:idd', async(req,res)=>{
 })
 
 // delete
-router.delete('/products/:idd'  , async(req,res)=>{
-    let {idd} = req.params;
+router.delete('/products/:idd', async (req, res) => {
+    let { idd } = req.params;
+    const product = await Product.findById(idd);
+    if (!product) {
+        return res.send("Product not found");}
+    for (let id of product.reviews) {
+        await Review.findByIdAndDelete(id);}
     await Product.findByIdAndDelete(idd);
-    res.redirect('/products')
-})
+    res.redirect('/products');
+});
 
 module.exports = router;
