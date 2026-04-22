@@ -4,26 +4,50 @@
 
     <div class = "row">
         <div class="col-6 mx-auto">
-
-            <form action="/products" methods="POST">
+            <!-- no validattion se kya hota h ki agar user ne form ke andar koi field ko empty choda to form submit ho jayega aur server side pe error aayega kyuki server ko wo field chahiye hogi to uske liye client side validation ka use karte h taki user ko turant feedback mil jaye ki usne koi field empty choda h ya galat data dala h to wo turant usko correct kar sake bina form submit kiye huye to iske liye humne bootstrap ke validation classes ka use kiya h jisme humne form ko "needs-validation" class di h aur har input field ke niche valid-feedback aur invalid-feedback divs diye h jisme humne feedback messages diye h taki jab user form submit kare to usko turant feedback mil jaye ki usne koi field empty choda h ya galat data dala h -->
+            <form action="/products" methods="POST" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label for="naam">Name:</label>
                     <input type="text" class="form-control" name="name" id="naam" placeholder="Name of the product">
+                    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+        Please enter the field.
+      </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="img">Image:</label>
                     <input type="text" class="form-control" name="img" id="img" placeholder="Image URL">
+                    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+        Please enter the field.
+      </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="paisa">Price:</label>
                     <input type="number" class="form-control" name="price" id="paisa" placeholder="Price of the product" step="0.01" min="0">
+                    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+        Please enter the field.
+      </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="desc">Description:</label>
-                    <textarea name="desc" id="desc" rows="5" placeholder="Description of the product"></textarea>
+                    <textarea name="desc" id="desc" rows="5" placeholder="Description of the product" class="form-control"></textarea>
+                    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+        Please enter the field.
+      </div>
                 </div>
 
                 <button type="submit" class="btn btn-sm btn-primary">
@@ -32,5 +56,33 @@
             </form>
         </div>
     </div>
+
+
+    <script>
+        //IIFE - Immediately Invoked Function Expression - INKA KOI KAAM NHI HAI BAS YEHI KAAM HAI KI YE FUNCTION JALDI SE EXECUTE HO JAYE WITHOUT WAITING FOR ANY EVENT TO HAPPEN
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+    </script>
+
 </body>
 </html>
+
+

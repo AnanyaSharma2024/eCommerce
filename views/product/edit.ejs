@@ -7,25 +7,74 @@
 </head>
 <body>
     <h1>Form to Edit product</h1>
-    <form action="/products/<%=foundProduct._id%>?_method=PATCH" method="POST">
+    <form action="/products/<%=foundProduct._id%>?_method=PATCH" method="POST" novalidate class="needs-validation">
         <div>
             <label for="naam">Name:</label>
-            <input type="text" name="name" id="naam" value="<%=foundProduct.name%>">
+            <input type="text" name="name" id="naam" value="<%=foundProduct.name%>" class="form-control" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter the field.
+            </div>
         </div>
         <div>
             <label for="img">Image:</label> 
-            <input type="text" name="img" id="img" value="<%=foundProduct.img%>">
+            <input type="text" name="img" id="img" value="<%=foundProduct.img%>" class="form-control" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter the field.
+            </div>
         </div>
         <div>
             <label for="paisa">Price:</label>
-            <input type="text" name="price" id="paisa" value="<%=foundProduct.price%>">
+            <input type="text" name="price" id="paisa" value="<%=foundProduct.price%>" class="form-control" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter the field.
+            </div>
         </div>
         <div>
             <label for="dessc">Description:</label>
-            <textarea rows="5" cols="15" name="desc" id="dessc"> <%=foundProduct.desc%> </textarea>
+            <textarea rows="5" cols="15" name="desc" id="dessc" class="form-control" required> <%=foundProduct.desc%> </textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter the field.
+            </div>
         </div>
     
         <button>Edit Product</button>
     </form>
+
+    <script>
+        //IIFE - Immediately Invoked Function Expression - INKA KOI KAAM NHI HAI BAS YEHI KAAM HAI KI YE FUNCTION JALDI SE EXECUTE HO JAYE WITHOUT WAITING FOR ANY EVENT TO HAPPEN
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+    </script>
+
 </body>
 </html>
