@@ -1,11 +1,10 @@
 <% layout('layouts/boilerplate') %>
-<% include('../partials/header') %>
 
 
     <div class = "row">
         <div class="col-6 mx-auto">
             <!-- no validattion se kya hota h ki agar user ne form ke andar koi field ko empty choda to form submit ho jayega aur server side pe error aayega kyuki server ko wo field chahiye hogi to uske liye client side validation ka use karte h taki user ko turant feedback mil jaye ki usne koi field empty choda h ya galat data dala h to wo turant usko correct kar sake bina form submit kiye huye to iske liye humne bootstrap ke validation classes ka use kiya h jisme humne form ko "needs-validation" class di h aur har input field ke niche valid-feedback aur invalid-feedback divs diye h jisme humne feedback messages diye h taki jab user form submit kare to usko turant feedback mil jaye ki usne koi field empty choda h ya galat data dala h -->
-            <form action="/products" methods="POST" novalidate class="needs-validation">
+            <form action="/products" method="POST" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label for="naam">Name:</label>
                     <input type="text" class="form-control" name="name" id="naam" placeholder="Name of the product">
@@ -82,7 +81,5 @@
 
     </script>
 
-</body>
-</html>
 
 

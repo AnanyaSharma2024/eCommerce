@@ -7,7 +7,7 @@ const productRoutes = require('./routes/productRoutes')
 const reviewRoutes = require('./routes/review')
 const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate');
-
+const {productSchema , reviewSchema} = require('./schema.js');
 // ejs mate ko set karna zaroori hai taki hum apne html files me ejs code ka use kar sakein aur dynamic data render kar sakein
 app.engine('ejs' , ejsMate);
 
